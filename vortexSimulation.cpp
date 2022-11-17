@@ -251,8 +251,15 @@ int main( int nargs, char* argv[] )
                 {
                     myScreen.close();
                     job = 2 ;
-                    // Part 1
-                    MPI_Send(&job, 1, MPI_INT, 1, 101, glob);
+                    // // Part 1
+                    // MPI_Send(&job, 1, MPI_INT, 1, 101, glob);
+
+                    // Part 3
+                    for(int i_dest = 1; i_dest<world_nbp; i_dest++)
+                    {
+                        MPI_Send(&job, 1, MPI_INT, i_dest, i_dest, glob);
+                        MPI_Send(&dt, 1, MPI_DOUBLE, i_dest, i_dest, glob);        
+                    }
                 }
                 if (event.type == sf::Event::Resized)
                 {
